@@ -1,0 +1,22 @@
+{% load crispy_forms_tags %}
+
+
+<form novalidate method="POST" action='{% url "person_create" %}' class='form' >
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit person</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        {% csrf_token %}
+        {{ form|crispy }}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" 
+              ic-post-to="{% url 'person_create' %}" ic-target=".modal-content" ic-replace-target="false"
+        >Save</button>                              
+    </div>
+</form>
+

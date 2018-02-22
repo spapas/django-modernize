@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.views.generic import ListView, UpdateView, CreateView
+from django.views.generic import ListView, UpdateView, CreateView, DetailView
 import core.models
 
 
@@ -11,6 +11,10 @@ class HomeTemplateView(TemplateView):
 class PersonListView(ListView):
     model = core.models.Person
     paginate_by = 9
+
+
+class PersonDetailView(DetailView):
+    model = core.models.Person
 
 
 class PersonModernListView(ListView):
@@ -31,6 +35,7 @@ class PersonCreateView(CreateView):
 
     def get_template_names(self):
         if self.request.is_ajax():
-            return 'core/partial/person_form.html'
+            return 'core/partial/modal_person_form.html'
 
         return super().get_template_names()
+

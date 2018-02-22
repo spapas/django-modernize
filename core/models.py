@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 SEX_CHOICES = (
@@ -12,3 +13,5 @@ class Person(models.Model):
     last_name = models.CharField(max_length=128, )
     sex = models.CharField(max_length=4, choices=SEX_CHOICES, )
 
+    def get_absolute_url(self):
+        return reverse('person_view', args=[str(self.id)])

@@ -1,6 +1,14 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block main %}
     {% block title %}Add person{% endblock %}
-    {% include "core/partial/person_form.html" %}
+    
+    <form novalidate method="POST" action='{% url "person_create" %}' class='form' >
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class='btn btn-primary' value='Save' type='submit' />
+        <a href="{% url 'person_list' %}" class='btn btn-info' >Return</a>
+    </div>
+
 
 {% endblock %}

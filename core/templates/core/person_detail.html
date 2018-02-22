@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}People list{% endblock %}
+{% block main %}
+
+{% with p=object %}
+    <div class="card" >
+      <div class="card-body">
+          <h4 class="card-title">{{ p.first_name }} {{ p.last_name }}</h4>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-sm btn-primary">Edit</a>
+      </div>
+    </div>
+{% endwith %}
+
+<a href="{% url 'person_list' %}" class="btn btn-sm btn-primary">Return</a>
+{% endblock %}
