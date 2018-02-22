@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}People list{% endblock %}
+{% block main %}
+{% for p in object_list %}
+    {{ p }}
+{% endfor %}
+{% endblock %}
