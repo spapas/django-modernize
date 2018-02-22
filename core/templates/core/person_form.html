@@ -1,4 +1,6 @@
 {% extends "base.html" %}
 {% block main %}
-    {{ form }}
+    {% block title %}Add person{% endblock %}
+    {% include "core/partial/person_form.html" %}
+
 {% endblock %}

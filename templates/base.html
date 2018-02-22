@@ -4,14 +4,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="A sample project">
+    <meta name="author" content="Serafeim Papastefanos">
     <link rel="icon" href="{% static 'favicon.ico' %}">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Django Modernize</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+
+    <script src="{% static 'turbolinks.min.js' %}"></script>
 
     <style>
       body {
@@ -19,24 +21,21 @@
       }
 
       li.nav-item.active {
-                border-bottom: 3pt solid #e67e22;
+                border-bottom: 3px solid #e67e22;
+                margin-bottom: -3px;
         }
 
       .bg-dark {
         background-color:#0a2e5c!important;
       } 
 
-      a.navbar-brand.active {
-
-                border-bottom: 3pt solid #e67e22;
-        }
     </style>
   </head>
 
   <body>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand active" href="{% url 'home' %}">Home</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Home</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -44,22 +43,19 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           {% include "partial/_navlink.html" with url_name='person_list' title='People list' %}
-          {% include "partial/_navlink.html" with url_name='person_list' title='People table' %}
-          {% include "partial/_navlink.html" with url_name='person_create' title='Add person' %}
+          {% include "partial/_navlink.html" with url_name='modern_person_list' title='Modern people list' %}
         </ul>
       </div>
     </nav>
 
     <main role="main" class="container">
       <h2>{% block title %}{% endblock %}</h2>
-      {% if request.path }}
       {% block main %}
       {% endblock %}
     </main><!-- /.container -->
 
-    <script src="{% static 'jquery-3.2.1.slim.min.js' %}" ></script>
+    <script src="{% static 'jquery-3.3.1.min.js' %}" ></script>
     <script src="{% static 'bootstrap.min.js' %}"></script>
-    <script src="{% static 'turbolinks.min.js' %}"></script>
     <script src="{% static 'intercooler.min.js' %}"></script>
   <script>
     Turbolinks.setProgressBarDelay(10)
