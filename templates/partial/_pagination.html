@@ -1,9 +1,5 @@
 {% load django_tables2 %}
 <nav aria-label="Pagination">
-  
-  
-
-
     <ul class="pagination pb-2">
         <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
             {% if page_obj.has_previous %}

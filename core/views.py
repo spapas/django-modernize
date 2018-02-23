@@ -39,9 +39,20 @@ class PersonModernListView(ListView):
     paginate_by = 9
     template_name="core/modern_person_list.html"
 
+    def get_queryset(self):
+        self.filter = core.filters.PersonFilter(self.request.GET, queryset=super().get_queryset())
+        return self.filter.qs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['filter'] = self.filter
+        return ctx
+
     def get_template_names(self):
         if self.request.is_ajax():
-            return 'core/partial/person_page.html'
+            if self.request.GET.get('page'):
+                return 'core/partial/person_page.html'
+            return 'core/partial/person_filter_page.html'
 
         return super().get_template_names()
 
