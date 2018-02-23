@@ -3,20 +3,25 @@
 <meta name="turbolinks-visit-control" content="reload">
 {% endblock %}
 
-{% block title %}Modern people list{% endblock %}
+{% block title %}
+
+Modern people list
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#theModal" 
+      ic-get-from="{% url 'person_create' %}" ic-target=".modal-content" ic-replace-target="false"
+      ic-on-beforeSend='clearModal' ic-indicator="#indicator"
+    >
+  +
+</button>
+<div class='indicator'  id="indicator" style="display:none"></div>
+{% endblock %}
 
 {% block main %}
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" 
-      ic-get-from="{% url 'person_create' %}" ic-target=".modal-content" ic-replace-target="false"
-    >
-  Add person
-</button>
+
    
 {% include 'core/partial/person_page.html' %}
 {% endblock %}
 {% block modal-container %}
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="theModal" tabindex="-1" role="dialog" aria-labelledby="A modal" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
         </div>
@@ -24,3 +29,10 @@
     </div>
 {% endblock %}    
 
+{% block extra-script %}
+<script>
+function clearModal() {
+    $('.modal-content').html('<div class="modal-header"><h5 class="modal-title" id="theModalLabel">Loading</h5></div><div class="modal-body"><div class="indicator" id="indicatorLoading" ></div></div>');
+}
+</script>
+{% endblock %}    

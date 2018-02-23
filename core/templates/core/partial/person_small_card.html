@@ -1,0 +1,33 @@
+<div class="card" >
+  
+  <div class="card-body">
+      <h4 class="card-title">{{ p.first_name }} {{ p.last_name }}</h4>
+    <p class="card-text">
+        <div class='row'>
+            <div class='col-md-3'>
+                <img src='{{ p.small_photo }}' />
+            </div>
+            <div class='col-md-9'>
+                <dl class="row">
+                <dt class="col-sm-6">Id</dt><dd class="col-sm-6 mb-0">{{ p.id }}</dd>
+                <dt class="col-sm-6">Sex</dt><dd class="col-sm-6  mb-0">{{ p.get_sex_display }}</dd>
+                <dt class="col-sm-6">Dob</dt><dd class="col-sm-6  mb-0">{{ p.dob|date:"d-m-y" }}</dd>
+                <dt class="col-sm-6">Nationality</dt><dd class="col-sm-6  mb-0">{{ p.nat }}</dd>
+                </dl>
+            </div>
+        </div>
+    </p>
+    <button class="btn btn-sm btn-primary"
+        ic-get-from="{% url 'person_view' p.id %}" ic-target=".modal-content" ic-replace-target="false"
+        data-toggle="modal" data-target="#theModal" 
+        ic-on-beforeSend='clearModal' ic-indicator="#indicatorCard"
+    >View</button>
+    <button class="btn btn-sm btn-primary"
+        ic-get-from="{% url 'person_update' p.id %}" ic-target=".modal-content" ic-replace-target="false"
+        data-toggle="modal" data-target="#theModal" 
+        ic-on-beforeSend='clearModal' ic-indicator="#indicatorCard"
+        
+    >Edit</button>
+    <div class='indicator'  id="indicatorCard" style="display:none"></div>
+  </div>
+</div>

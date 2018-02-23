@@ -52,6 +52,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    
+    'django_modernize.middlewares.SleepMiddleware', 
 ]
 
 ROOT_URLCONF = 'django_modernize.urls'

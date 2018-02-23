@@ -5,12 +5,31 @@
 {% with p=object %}
     <div class="card" >
       <div class="card-body">
-          <h4 class="card-title">{{ p.first_name }} {{ p.last_name }}</h4>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-sm btn-primary">Edit</a>
+            <h4 class="card-title">{{ p.first_name }} {{ p.last_name }}</h4>
+                <div class='row'>
+                <div class='col-md-4'>
+                    <img src='{{ p.large_photo }}' />
+                </div>
+                <div class='col-md-8'>
+                    <dl class="row">
+                        <dt class="col-sm-5">Id</dt><dd class="col-sm-7 mb-0">{{ p.id }}</dd>
+                        <dt class="col-sm-5">Sex</dt><dd class="col-sm-7  mb-0">{{ p.get_sex_display }}</dd>
+                        <dt class="col-sm-5">Dob</dt><dd class="col-sm-7  mb-0">{{ p.dob|date:"d-m-y" }}</dd>
+                        <dt class="col-sm-5">Nationality</dt><dd class="col-sm-7  mb-0">{{ p.nat }}</dd>
+                    </dl>
+                </div>
+            </div>
+            <dl class='row'>
+                
+                    <dt class="col-sm-2 mt-2">Address</dt><dd class="col-sm-10 mt-2 mb-0">{{ p.address }}</dd>
+                    <dt class="col-sm-2">Phone</dt><dd class="col-sm-9 mb-0">{{ p.phone }}</dd>
+                    <dt class="col-sm-2">Cell</dt><dd class="col-sm-9  mb-0">{{ p.cell }}</dd>
+                    </dl>
+               
+            </div>    
       </div>
-    </div>
-{% endwith %}
 
-<a href="{% url 'person_list' %}" class="btn btn-sm btn-primary">Return</a>
+<a href="{% url 'person_update' p.id %}" class="btn btn-sm btn-primary">Edit</a>
+{% endwith %}
+<a href="{% url 'person_list' %}" class="btn btn-sm btn-secondary">Return</a>
 {% endblock %}

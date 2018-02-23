@@ -3,7 +3,13 @@
 
 <form novalidate method="POST" action='{% url "person_create" %}' class='form' >
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit person</h5>
+        <h5 class="modal-title" id="theModalLabel">
+            {% if form.instance.id %}
+                Edit person {{ form.instance.id }}
+            {% else %}
+                Add person
+            {% endif %}
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -14,9 +20,13 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" 
+        <button type="submit" class="btn btn-primary"
               ic-post-to="{% url 'person_create' %}" ic-target=".modal-content" ic-replace-target="false"
-        >Save</button>                              
+              ic-indicator="#indicatorModal"
+        >Save</button>
+        
+        <div class='indicator' id="indicatorModal" style="display:none"></div>
+        
     </div>
 </form>
 

@@ -15,6 +15,12 @@ class PersonListView(ListView):
 
 class PersonDetailView(DetailView):
     model = core.models.Person
+    
+    def get_template_names(self):
+        if self.request.is_ajax():
+            return 'core/partial/person_modal.html'
+
+        return super().get_template_names()
 
 
 class PersonModernListView(ListView):
@@ -31,7 +37,7 @@ class PersonModernListView(ListView):
 
 class PersonCreateView(CreateView):
     model = core.models.Person
-    fields = ('first_name', 'last_name', 'sex', )
+    fields = ('first_name', 'last_name', 'sex', 'dob', 'nat', 'address', 'phone', 'cell' ,'large_photo', 'medium_photo', 'small_photo',  )
 
     def get_template_names(self):
         if self.request.is_ajax():
@@ -39,3 +45,13 @@ class PersonCreateView(CreateView):
 
         return super().get_template_names()
 
+
+class PersonUpdateView(UpdateView):
+    model = core.models.Person
+    fields = ('first_name', 'last_name', 'sex', 'dob', 'nat', 'address', 'phone', 'cell' ,'large_photo', 'medium_photo', 'small_photo',  )
+
+    def get_template_names(self):
+        if self.request.is_ajax():
+            return 'core/partial/modal_person_form.html'
+
+        return super().get_template_names()        

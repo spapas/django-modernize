@@ -14,8 +14,8 @@
           <div class="card-body">
               <h4 class="card-title">{{ p.first_name }} {{ p.last_name }}</h4>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-sm btn-primary">View</a>
-            <a href="#" class="btn btn-sm btn-primary">Edit</a>
+            <a href="{% url 'person_view' p.id %}" class="btn btn-sm btn-primary">View</a>
+            <a href="{% url 'person_update' p.id %}" class="btn btn-sm btn-primary">Edit</a>
           </div>
         </div>
     {% endfor %}
