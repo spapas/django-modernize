@@ -1,8 +1,13 @@
+{% load django_tables2 %}
 <nav aria-label="Pagination">
-    <ul class="pagination">
+  
+  
+
+
+    <ul class="pagination pb-2">
         <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
             {% if page_obj.has_previous %}
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+                <a class="page-link" href="{% querystring "page"=page_obj.previous_page_number %}" tabindex="-1">Previous</a>
             {% else %}
                 <a class="page-link" href="#" tabindex="-1">Previous</a>
             {% endif %}
@@ -12,7 +17,7 @@
         </li>
         <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
             {% if page_obj.has_next %}
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}" tabindex="-1">Next</a>
+            <a class="page-link" href="{% querystring "page"=page_obj.next_page_number %}" tabindex="-1">Next</a>
             {% else %}
                 <a class="page-link" href="#" tabindex="-1">Next</a>
             {% endif %}

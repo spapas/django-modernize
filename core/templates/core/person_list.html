@@ -1,13 +1,10 @@
 {% extends "base.html" %}
-{% block title %}People list{% endblock %}
+{% block title %}
+    People list
+    <a class='btn btn-primary' href='{% url "person_create" %}'>+</a>
+{% endblock %}
 {% block main %}
-
-<div class='row'>
-    <div class='col-md-12'>
-        <a class='btn btn-primary' href='{% url "person_create" %}'>Add</a>
-    </div>
-</div>
-
+{% include "partial/_filter.html" %}
 <div class='card-columns'>
     {% for p in object_list %}
         <div class="card" >

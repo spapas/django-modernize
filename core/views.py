@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic import ListView, UpdateView, CreateView, DetailView
 import core.models
+import core.filters
 
 
 class HomeTemplateView(TemplateView):
@@ -12,10 +13,20 @@ class PersonListView(ListView):
     model = core.models.Person
     paginate_by = 9
 
+    def get_queryset(self):
+        self.filter = core.filters.PersonFilter(self.request.GET, queryset=super().get_queryset())
+        return self.filter.qs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['filter'] = self.filter
+        return ctx
+
+
 
 class PersonDetailView(DetailView):
     model = core.models.Person
-    
+
     def get_template_names(self):
         if self.request.is_ajax():
             return 'core/partial/person_modal.html'
@@ -54,4 +65,4 @@ class PersonUpdateView(UpdateView):
         if self.request.is_ajax():
             return 'core/partial/modal_person_form.html'
 
-        return super().get_template_names()        
+        return super().get_template_names()

@@ -1,0 +1,10 @@
+{% load crispy_forms_tags %}
+<div class='row mb-2'>
+    <div class='col-md-12'>
+        <form method='GET' class='form-inline' >
+            {{ filter.form|crispy }}
+            <input class='btn btn-info ml-1' type='submit' value='Filter' />
+            <a href='{{ request.path }}' class='btn btn-info ml-1'>Reset</a>
+        </form>
+    </div>
+</div>
