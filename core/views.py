@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic import TemplateView
 from django.views.generic import ListView, UpdateView, CreateView, DetailView
 import core.models
@@ -29,7 +30,7 @@ class PersonDetailView(DetailView):
 
     def get_template_names(self):
         if self.request.is_ajax():
-            return 'core/partial/person_modal.html'
+            return 'core/person_partial/person_modal.html'
 
         return super().get_template_names()
 
@@ -51,8 +52,8 @@ class PersonModernListView(ListView):
     def get_template_names(self):
         if self.request.is_ajax():
             if self.request.GET.get('page'):
-                return 'core/partial/person_page.html'
-            return 'core/partial/person_filter_page.html'
+                return 'core/person_partial/person_page.html'
+            return 'core/person_partial/person_filter_page.html'
 
         return super().get_template_names()
 
@@ -63,9 +64,25 @@ class PersonCreateView(CreateView):
 
     def get_template_names(self):
         if self.request.is_ajax():
-            return 'core/partial/modal_person_form.html'
+            return 'core/person_partial/modal_person_form.html'
 
         return super().get_template_names()
+
+    def get_success_url(self):
+        if self.request.is_ajax():
+            return reverse('person_form_success')
+
+        return super().get_success_url()
+
+
+
+class PersonSuccessTemplateView(TemplateView):
+    template_name = 'core/person_partial/person_form_success.html'
+
+    def dispatch(self, *args, **kwargs):
+        response = super(PersonSuccessTemplateView, self).dispatch(*args, **kwargs)
+        response['X-IC-Trigger'] = 'refreshList'
+        return response
 
 
 class PersonUpdateView(UpdateView):
@@ -74,6 +91,22 @@ class PersonUpdateView(UpdateView):
 
     def get_template_names(self):
         if self.request.is_ajax():
-            return 'core/partial/modal_person_form.html'
+            return 'core/person_partial/modal_person_form.html'
 
         return super().get_template_names()
+
+    def get_success_url(self):
+        if self.request.is_ajax():
+            return reverse('person_form_success')
+
+        return super().get_success_url()
+
+    def dispatch(self, *args, **kwargs):
+        response = super(PersonUpdateView, self).dispatch(*args, **kwargs)
+        if response.status_code == 200:
+            # Do nothing
+            pass
+        else:
+            response['X-IC-Trigger'] = 'refreshList'
+        return response
+

@@ -1,7 +1,8 @@
 {% load crispy_forms_tags %}
 
 
-<form novalidate method="POST" action='{% url "person_create" %}' class='form' >
+<form novalidate method="POST" action='' class='form' >
+    
     <div class="modal-header">
         <h5 class="modal-title" id="theModalLabel">
             {% if form.instance.id %}
@@ -21,12 +22,17 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary"
-              ic-post-to="{% url 'person_create' %}" ic-target=".modal-content" ic-replace-target="false"
+              ic-post-to="{{ request.path }}" 
+              ic-target=".modal-content" 
+              ic-replace-target="false"
               ic-indicator="#indicatorModal"
+              ic-on-success="afterSave(data , textStatus , xhr )"
         >Save</button>
         
         <div class='indicator' id="indicatorModal" style="display:none"></div>
         
     </div>
 </form>
+
+
 

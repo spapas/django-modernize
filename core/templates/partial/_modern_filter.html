@@ -1,0 +1,19 @@
+{% load crispy_forms_tags %}
+<div class='row mb-2'>
+    <div class='col-md-12' ic-push-url="true">
+        <form 
+            id='filterForm'
+            ic-push-url="false"  
+            method='GET' 
+            class='form-inline' 
+            ic-get-from="{{ request.path }}" 
+            ic-target="#filter-partial-content" 
+            ic-replace-target="true"  
+            
+        >
+            {{ filter.form|crispy }}
+            <input type='submit' class='btn btn-info ml-1' value='Filter' />
+            <a id='resetFilter' href='{{ request.path }}' class='btn btn-info ml-1'>Reset</a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+{% load django_tables2 %}
+<div class='person-page'>
+    <div class='card-columns'>
+        {% for p in object_list %}
+            {% include 'core/person_partial/person_small_card.html' %}
+        {% endfor %}
+    </div>
+    <div class='row'>
+        <div class='col-md-12'>
+            {% if is_paginated %}
+                {% include 'partial/_modern_pagination.html' %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+

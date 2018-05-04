@@ -12,11 +12,11 @@ Modern people list
     >
   +
 </button>
-<div class='indicator'  id="indicator" style="display:none"></div>
+<div class='indicator' id="indicator" style="display:none"></div>
 {% endblock %}
 
 {% block main %}
-{% include "core/partial/person_filter_page.html" %}
+{% include "core/person_partial/person_filter_page.html" %}
 {% endblock %}
 {% block modal-container %}
     <div class="modal fade" id="theModal" tabindex="-1" role="dialog" aria-labelledby="A modal" aria-hidden="true">
@@ -32,5 +32,13 @@ Modern people list
 function clearModal() {
     $('.modal-content').html('<div class="modal-header"><h5 class="modal-title" id="theModalLabel">Loading</h5></div><div class="modal-body"><div class="indicator" id="indicatorLoading" ></div></div>');
 }
+
+function afterSave(data , textStatus , xhr ) {
+    console.log("AFTER SAVE", data , textStatus , xhr );
+}
+
+$('body').on('refreshList', function (elt, msg, header, type) {
+    Intercooler.refresh($('#filterForm'))
+});
 </script>
 {% endblock %}    

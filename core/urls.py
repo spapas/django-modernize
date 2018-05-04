@@ -8,4 +8,5 @@ urlpatterns = [
     path('person_update/<int:pk>/', core.views.PersonUpdateView.as_view(), name='person_update', ),
     path('modern_person_list', core.views.PersonModernListView.as_view(), name='modern_person_list', ),
     path('person_create', core.views.PersonCreateView.as_view(), name='person_create', ),
+    path('person_form_success', core.views.PersonSuccessTemplateView.as_view(), name='person_form_success', ),
 ]
