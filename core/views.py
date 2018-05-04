@@ -9,6 +9,11 @@ import core.filters
 class HomeTemplateView(TemplateView):
     template_name="home.html"
 
+    def get_template_names(self):
+        if self.request.is_ajax():
+            return 'partial/small_home.html'
+        return super().get_template_names()
+
 
 class PersonListView(ListView):
     model = core.models.Person
