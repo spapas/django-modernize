@@ -5,16 +5,20 @@ import requests, json, datetime
 class Command(BaseCommand):
     help = 'Read persons'
 
+    def add_arguments(self, parser):
+        parser.add_argument('count', type=int)
+
+
     def handle(self, *args, **options):
-    
+
         def get_address(p):
             street = p['location']['street'].title()
             city = p['location']['city'].title()
             state = p['location']['state'].title()
             postcode = p['location']['postcode']
-            return f'{street} {city} {state} {postcode}' 
-    
-        r = requests.get('https://randomuser.me/api/?results=50')
+            return f'{street} {city} {state} {postcode}'
+
+        r = requests.get('https://randomuser.me/api/?results={}'.format(options['count']))
         j = json.loads(r.content)
 
         persons = [
@@ -30,7 +34,7 @@ class Command(BaseCommand):
                 large_photo=p['picture']['large'],
                 medium_photo=p['picture']['medium'],
                 small_photo=p['picture']['thumbnail'],
-                
+
                 sex=p['gender'][0].upper(),
             ) for p in j['results']
         ]
