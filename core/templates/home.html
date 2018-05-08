@@ -22,4 +22,34 @@ Welcome!
 >Not so simple test </button>
 <div class='indicator' id="demoIndicator" style='display:none'></div>
 <div id='remoteData'>Waiting for data ... </div>
+
+<hr />
+<button id='buttonJQ' class='btn btn-primary'
+>Not so simple test with jQuery</button>
+<div class='indicator' id="demoIndicatorJQ" style='display:none'></div>
+<div id='remoteDataJQ'>Waiting for data ... </div>
+
+{% endblock %}
+
+{% block extra_script %}
+
+<script type="text/javascript" >
+
+    $(function() {
+        $('#buttonJQ').click(function() {
+            console.log("Before trigger");
+            $('#demoIndicatorJQ').show();
+            console.log("Before send");
+            
+            $.get("{% url 'home' %}", function( data ) {
+                console.log("Success!");
+                $("#remoteDataJQ").html(data);
+                $('#demoIndicatorJQ').hide();
+                console.log("Completed");
+            });
+            
+        })
+    });
+</script>
+
 {% endblock %}
