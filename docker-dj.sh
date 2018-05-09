@@ -1,1 +1,1 @@
-docker run -it --rm -v $(pwd):/code/ django_modernize python /src/manage.py $*
+docker run -it --rm -v $(pwd):/code/ django-modernize python /code/manage.py $*
