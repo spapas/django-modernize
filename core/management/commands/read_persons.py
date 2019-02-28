@@ -27,7 +27,7 @@ class Command(BaseCommand):
                 last_name=p['name']['last'].title(),
                 email=p['email'],
                 address=get_address(p),
-                dob=datetime.datetime.strptime(p['dob'].split(' ')[0], "%Y-%m-%d") ,
+                dob=datetime.datetime.strptime(p['dob']['date'].split('T')[0], "%Y-%m-%d") ,
                 phone=p['phone'],
                 cell=p['cell'],
                 nat=p['nat'],
