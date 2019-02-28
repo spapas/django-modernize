@@ -112,5 +112,7 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+tags*
 
 # End of https://www.gitignore.io/api/django,python
+#
